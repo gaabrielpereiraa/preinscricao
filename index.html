@@ -286,38 +286,47 @@
     });
 
     // Função em branco para você implementar
-function handleFormSubmit(data) {
-      console.log('Dados do formulário:', data);
-      
-      fetch(URL, {
-        method: 'POST',
-        // ----------------- MUDANÇA AQUI -----------------
-        // Mude de 'application/json' para 'text/plain'
-        // Isso evita a requisição OPTIONS (preflight) que causa o erro de CORS
-        headers: { 
-          'Content-Type': 'text/plain;charset=utf-8' 
-        },
-        // ----------------- FIM DA MUDANÇA -----------------
-        body: JSON.stringify(data)
-      })
-      .then(response => {
-        // É uma boa prática verificar se a resposta foi ok
-        if (!response.ok) {
-            // Se o servidor respondeu com um erro (ex: 404, 500), jogue um erro
-            return response.text().then(text => { throw new Error(text) });
-        }
-        return response.json();
-      })
-      .then(result => {
-        console.log('Resposta do script:', result);
+    function handleFormSubmit(data) {
+    console.log('Dados do formulário:', data);
+    
+    const submitButton = form.querySelector('button[type="submit"]');
+    const originalText = submitButton.textContent;
+    submitButton.disabled = true;
+    submitButton.textContent = 'ENVIANDO...';
+    
+    // Criar callback único
+    const callbackName = 'callback_' + Date.now();
+    
+    // Criar função de callback global
+    window[callbackName] = function(response) {
+        console.log('Resposta recebida:', response);
         alert('Inscrição realizada com sucesso!');
         form.reset();
-      })
-      // ----------------- FIM DA MUDANÇA -----------------
-      .catch(error => {
-        console.error('Erro:', error);
-        //alert('Houve um erro ao enviar sua inscrição. Tente novamente.\nDetalhe: ' + error.message);
-      });
+        submitButton.disabled = false;
+        submitButton.textContent = originalText;
+        delete window[callbackName];
+    };
+    
+    // Criar script tag para JSONP
+    const script = document.createElement('script');
+    const params = new URLSearchParams({
+        ...data,
+        callback: callbackName
+    });
+    script.src = `${URL}?${params}`;
+    
+    // Timeout de segurança
+    setTimeout(() => {
+        if (window[callbackName]) {
+        alert('Inscrição enviada! (Aguardando confirmação)');
+        form.reset();
+        submitButton.disabled = false;
+        submitButton.textContent = originalText;
+        delete window[callbackName];
+        }
+    }, 5000);
+    
+    document.body.appendChild(script);
     }
   </script>
 </body>
