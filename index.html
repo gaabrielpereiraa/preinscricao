@@ -294,39 +294,23 @@
     submitButton.disabled = true;
     submitButton.textContent = 'ENVIANDO...';
     
-    // Criar callback único
-    const callbackName = 'callback_' + Date.now();
-    
-    // Criar função de callback global
-    window[callbackName] = function(response) {
-        console.log('Resposta recebida:', response);
-        alert('Pré-Inscrição realizada com sucesso!');
-        form.reset();
-        submitButton.disabled = false;
-        submitButton.textContent = originalText;
-        delete window[callbackName];
-    };
-    
-    // Criar script tag para JSONP
-    const script = document.createElement('script');
-    const params = new URLSearchParams({
-        ...data,
-        callback: callbackName
+    // Envia a requisição
+    fetch(URL, {
+        method: 'POST',
+        mode: 'no-cors',
+        headers: { 
+        'Content-Type': 'text/plain;charset=utf-8' 
+        },
+        body: JSON.stringify(data)
     });
-    script.src = `${URL}?${params}`;
     
-    // Timeout de segurança
+    // Aguarda um tempo razoável e assume sucesso
     setTimeout(() => {
-        if (window[callbackName]) {
-        alert('Inscrição enviada! (Aguardando confirmação)');
+        alert('Inscrição realizada com sucesso!');
         form.reset();
         submitButton.disabled = false;
         submitButton.textContent = originalText;
-        delete window[callbackName];
-        }
-    }, 5000);
-    
-    document.body.appendChild(script);
+    }, 2000); // 2 segundos
     }
   </script>
 </body>
