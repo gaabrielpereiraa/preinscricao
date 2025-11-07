@@ -1,0 +1,324 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8"/>
+  <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+  <title>Processo Seletivo - UFRJ Consulting Club</title>
+  <script src="https://cdn.tailwindcss.com?plugins=forms,typography"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet"/>
+  <style>
+    body {
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+      min-height: max(884px, 100dvh);
+      font-family: 'Montserrat', sans-serif;
+    }
+  </style>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            primary: "#FAD419",
+            "background-light": "#F3F4F6",
+          },
+          fontFamily: {
+            display: ["Montserrat", "sans-serif"],
+          },
+          borderRadius: {
+            DEFAULT: "0.5rem",
+          },
+        },
+      },
+    };
+  </script>
+</head>
+<body class="bg-background-light font-display">
+  <div class="min-h-screen flex flex-col">
+    <header class="bg-black py-4 px-4 sm:px-6 shadow-md">
+      <div class="max-w-md mx-auto flex items-center justify-between">
+        <div class="flex items-center space-x-2">
+          <!-- Substitua o SVG abaixo pelo seu -->
+          <div id="logo-container">
+            <img src="logo.png" alt="Logo TELACC" class="h-10 w-auto"/>
+          </div>
+        </div>
+        <h1 class="text-2xl sm:text-3xl font-bold text-white tracking-tight">
+          Processo Seletivo
+        </h1>
+      </div>
+    </header>
+
+    <main class="flex-grow flex items-center justify-center p-4 sm:p-6">
+      <div class="w-full max-w-md bg-black rounded-lg p-6 sm:p-8">
+        <form id="inscricaoForm" class="space-y-6" novalidate>
+          <div>
+            <label class="block text-sm font-medium text-white/90 mb-1" for="nome">
+              Nome: <span class="text-red-500">*</span>
+            </label>
+            <input 
+              class="w-full bg-white border-transparent rounded-DEFAULT focus:ring-primary focus:border-primary text-gray-900 placeholder-gray-500" 
+              id="nome" 
+              name="nome" 
+              type="text"
+              required
+            />
+            <span class="text-red-400 text-xs mt-1 hidden" id="nome-error"></span>
+          </div>
+
+          <div>
+            <label class="block text-sm font-medium text-white/90 mb-1" for="dre">
+              DRE: <span class="text-red-500">*</span>
+            </label>
+            <input 
+              class="w-full bg-white border-transparent rounded-DEFAULT focus:ring-primary focus:border-primary text-gray-900 placeholder-gray-500" 
+              id="dre" 
+              name="dre" 
+              type="text"
+              required
+            />
+            <span class="text-red-400 text-xs mt-1 hidden" id="dre-error"></span>
+          </div>
+
+          <div>
+            <label class="block text-sm font-medium text-white/90 mb-1" for="email">
+              E-mail: <span class="text-red-500">*</span>
+            </label>
+            <input 
+              class="w-full bg-white border-transparent rounded-DEFAULT focus:ring-primary focus:border-primary text-gray-900 placeholder-gray-500" 
+              id="email" 
+              name="email" 
+              type="email"
+              required
+            />
+            <span class="text-red-400 text-xs mt-1 hidden" id="email-error"></span>
+          </div>
+
+          <div>
+            <label class="block text-sm font-medium text-white/90 mb-1" for="telefone">
+              Telefone: <span class="text-red-500">*</span>
+            </label>
+            <input 
+              class="w-full bg-white border-transparent rounded-DEFAULT focus:ring-primary focus:border-primary text-gray-900 placeholder-gray-500" 
+              id="telefone" 
+              name="telefone" 
+              type="tel"
+              placeholder="(21) 99999-9999"
+              required
+            />
+            <span class="text-red-400 text-xs mt-1 hidden" id="telefone-error"></span>
+          </div>
+
+          <div>
+            <label class="block text-sm font-medium text-white/90 mb-1" for="periodo">
+              Período: <span class="text-red-500">*</span>
+            </label>
+            <input 
+              class="w-full bg-white border-transparent rounded-DEFAULT focus:ring-primary focus:border-primary text-gray-900 placeholder-gray-500" 
+              id="periodo" 
+              name="periodo" 
+              type="number"
+              placeholder="Ex: 3º"
+              required
+            />
+            <span class="text-red-400 text-xs mt-1 hidden" id="periodo-error"></span>
+          </div>
+
+          <div>
+            <label class="block text-sm font-medium text-white/90 mb-1" for="curso">
+              Curso: <span class="text-red-500">*</span>
+            </label>
+            <input 
+              class="w-full bg-white border-transparent rounded-DEFAULT focus:ring-primary focus:border-primary text-gray-900 placeholder-gray-500" 
+              id="curso" 
+              name="curso" 
+              type="text"
+              required
+            />
+            <span class="text-red-400 text-xs mt-1 hidden" id="curso-error"></span>
+          </div>
+
+          <fieldset>
+            <legend class="text-sm font-medium text-white/90 mb-2">
+              Já participou do PS antes? <span class="text-red-500">*</span>
+            </legend>
+            <div class="flex items-center space-x-6">
+              <div class="flex items-center">
+                <input 
+                  class="h-4 w-4 text-primary border-gray-300 focus:ring-primary" 
+                  id="ps-sim" 
+                  name="ps-antes" 
+                  type="radio"
+                  value="sim"
+                  required
+                />
+                <label class="ml-2 block text-sm text-white" for="ps-sim">Sim</label>
+              </div>
+              <div class="flex items-center">
+                <input 
+                  class="h-4 w-4 text-primary border-gray-300 focus:ring-primary" 
+                  id="ps-nao" 
+                  name="ps-antes" 
+                  type="radio"
+                  value="nao"
+                  required
+                />
+                <label class="ml-2 block text-sm text-white" for="ps-nao">Não</label>
+              </div>
+            </div>
+            <span class="text-red-400 text-xs mt-1 hidden" id="ps-antes-error"></span>
+          </fieldset>
+
+          <div>
+            <button 
+              class="w-full flex justify-center py-3 px-4 border border-transparent rounded-DEFAULT shadow-sm text-sm font-bold text-black bg-primary hover:bg-yellow-300 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-black focus:ring-primary transition-colors" 
+              type="submit"
+            >
+              REALIZAR PRÉ-INSCRIÇÃO
+            </button>
+          </div>
+        </form>
+      </div>
+    </main>
+  </div>
+
+  <script>
+    const URL = "https://script.google.com/macros/s/AKfycbyiPK8iVKdCLc3sJ-1Mha7JlI8HoSs-mt4LHD3CLEz5woXYDJVOsMJvIWX9mHzQ4oQQMQ/exec";
+    const form = document.getElementById('inscricaoForm');
+
+    // Validação em tempo real
+    form.querySelectorAll('input[required]').forEach(input => {
+      input.addEventListener('blur', () => validateField(input));
+      input.addEventListener('input', () => {
+        const errorSpan = document.getElementById(`${input.id}-error`);
+        if (errorSpan && !errorSpan.classList.contains('hidden')) {
+          validateField(input);
+        }
+      });
+    });
+
+    // Máscara de telefone
+    document.getElementById('telefone').addEventListener('input', function(e) {
+      let value = e.target.value.replace(/\D/g, '');
+      if (value.length <= 11) {
+        value = value.replace(/^(\d{2})(\d)/g, '($1) $2');
+        value = value.replace(/(\d)(\d{4})$/, '$1-$2');
+      }
+      e.target.value = value;
+    });
+
+    function validateField(field) {
+      const errorSpan = document.getElementById(`${field.id}-error`);
+      let isValid = true;
+      let errorMessage = '';
+
+      if (!field.value.trim()) {
+        isValid = false;
+        errorMessage = 'Este campo é obrigatório';
+      } else if (field.type === 'email') {
+        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        if (!emailRegex.test(field.value)) {
+          isValid = false;
+          errorMessage = 'E-mail inválido';
+        }
+      } else if (field.type === 'tel') {
+        const phoneRegex = /^\(\d{2}\)\s\d{4,5}-\d{4}$/;
+        if (!phoneRegex.test(field.value)) {
+          isValid = false;
+          errorMessage = 'Telefone inválido. Use: (21) 99999-9999';
+        }
+      }
+
+      if (errorSpan) {
+        if (isValid) {
+          errorSpan.classList.add('hidden');
+          field.classList.remove('border-red-500');
+        } else {
+          errorSpan.textContent = errorMessage;
+          errorSpan.classList.remove('hidden');
+          field.classList.add('border-red-500', 'border-2');
+        }
+      }
+
+      return isValid;
+    }
+
+    form.addEventListener('submit', function(e) {
+      e.preventDefault();
+      
+      let isFormValid = true;
+      
+      // Validar todos os campos
+      form.querySelectorAll('input[required]').forEach(input => {
+        if (!validateField(input)) {
+          isFormValid = false;
+        }
+      });
+
+      // Validar radio buttons
+      const psAntes = form.querySelector('input[name="ps-antes"]:checked');
+      const psError = document.getElementById('ps-antes-error');
+      
+      if (!psAntes) {
+        isFormValid = false;
+        psError.textContent = 'Selecione uma opção';
+        psError.classList.remove('hidden');
+      } else {
+        psError.classList.add('hidden');
+      }
+
+      if (isFormValid) {
+        // Coletar dados do formulário
+        const formData = {
+          nome: document.getElementById('nome').value,
+          email: document.getElementById('email').value,
+          telefone: document.getElementById('telefone').value,
+          periodo: document.getElementById('periodo').value,
+          curso: document.getElementById('curso').value,
+          dre: document.getElementById('dre').value,
+          jaFezPS: psAntes.value,
+          status: 'Pré-inscrito'
+        };
+
+        // COLOQUE SEU CÓDIGO AQUI
+        handleFormSubmit(formData);
+      }
+    });
+
+    // Função em branco para você implementar
+function handleFormSubmit(data) {
+      console.log('Dados do formulário:', data);
+      
+      fetch(URL, {
+        method: 'POST',
+        // ----------------- MUDANÇA AQUI -----------------
+        // Mude de 'application/json' para 'text/plain'
+        // Isso evita a requisição OPTIONS (preflight) que causa o erro de CORS
+        headers: { 
+          'Content-Type': 'text/plain;charset=utf-8' 
+        },
+        // ----------------- FIM DA MUDANÇA -----------------
+        body: JSON.stringify(data)
+      })
+      .then(response => {
+        // É uma boa prática verificar se a resposta foi ok
+        if (!response.ok) {
+            // Se o servidor respondeu com um erro (ex: 404, 500), jogue um erro
+            return response.text().then(text => { throw new Error(text) });
+        }
+        return response.json();
+      })
+      .then(result => {
+        console.log('Resposta do script:', result);
+        alert('Inscrição realizada com sucesso!');
+        form.reset();
+      })
+      // ----------------- FIM DA MUDANÇA -----------------
+      .catch(error => {
+        console.error('Erro:', error);
+        //alert('Houve um erro ao enviar sua inscrição. Tente novamente.\nDetalhe: ' + error.message);
+      });
+    }
+  </script>
+</body>
+</html>
